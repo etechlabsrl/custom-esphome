@@ -102,7 +102,7 @@ namespace knx {
 
 
   bool KnxComponent::is_knx_control_byte(int b) {
-    return ( (b | B00101100) == B10111100 ); // Ignore repeat flag and priority flag
+    return ( (b | 0b00101100) == 0b10111100 ); // Ignore repeat flag and priority flag
   }
 
   void KnxComponent::check_errors() {
@@ -172,7 +172,7 @@ namespace knx {
   bool KnxComponent::group_write_bool(String address, bool value) {
     int valueAsInt = 0;
     if (value) {
-      valueAsInt = B00000001;
+      valueAsInt = 0b00000001;
     }
 
     this->create_knx_message_frame(2, KNX_COMMAND_WRITE, address, valueAsInt);
@@ -192,7 +192,7 @@ namespace knx {
   bool KnxComponent::group_write_4Bit_dim(String address, bool direction, byte steps) {
     int value = 0;
     if (direction || steps) {
-      value = (direction << 3) + (steps & B00000111);
+      value = (direction << 3) + (steps & 0b00000111);
     }
 
     this->create_knx_message_frame(2, KNX_COMMAND_WRITE, address, value);
@@ -253,7 +253,7 @@ namespace knx {
   bool KnxComponent::group_answer_bool(String address, bool value) {
     int valueAsInt = 0;
     if (value) {
-      valueAsInt = B00000001;
+      valueAsInt = 0b00000001;
     }
 
     create_knx_message_frame(2, KNX_COMMAND_ANSWER, address, valueAsInt);
@@ -420,10 +420,10 @@ namespace knx {
     int confirmation;
     while (true) {
       confirmation = serial_read();
-      if (confirmation == B10001011) {
+      if (confirmation == 0b10001011) {
         return true; // Sent successfully
       }
-      else if (confirmation == B00001011) {
+      else if (confirmation == 0b00001011) {
         return false;
       }
       else if (confirmation == -1) {
@@ -457,11 +457,11 @@ namespace knx {
     int confirmation;
     while (true) {
       confirmation = this->serial_read();
-      if (confirmation == B10001011) {
+      if (confirmation == 0b10001011) {
         delay (SERIAL_WRITE_DELAY_MS);
         return true; // Sent successfully
       }
-      else if (confirmation == B00001011) {
+      else if (confirmation == 0b00001011) {
         delay (SERIAL_WRITE_DELAY_MS);
         return false;
       }
@@ -477,13 +477,13 @@ namespace knx {
   }
 
   void KnxComponent::send_ack() {
-    byte sendByte = B00010001;
+    byte sendByte = 0b00010001;
     this->write(sendByte);
     delay(SERIAL_WRITE_DELAY_MS);
   }
 
   void KnxComponent::send_not_addressed() {
-    byte sendByte = B00010000;
+    byte sendByte = 0b00010000;
     this->write(sendByte);
     delay(SERIAL_WRITE_DELAY_MS);
   }
