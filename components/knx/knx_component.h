@@ -1,4 +1,4 @@
-// Author: Dulgheru Mihaita (Since 2022)
+<// Author: Dulgheru Mihaita (Since 2022)
 // Last modified: 05.05.2022
 
 #pragma once
@@ -16,10 +16,10 @@ namespace knx {
 
 static const int MAX_LISTEN_GROUP_ADDRESSES=15;
 static const int SERIAL_WRITE_DELAY_MS=100;
-static const byte TPUART_DATA_START_CONTINUE=B10000000;
-static const byte TPUART_DATA_END=B01000000;
+static const byte TPUART_DATA_START_CONTINUE=0b10000000;
+static const byte TPUART_DATA_END=0b01000000;
 // Services from TPUART
-static const byte  TPUART_RESET_INDICATION_BYTE=B11;
+static const byte  TPUART_RESET_INDICATION_BYTE=0b11;
 
 enum KnxComponentserial_eventType {
   TPUART_RESET_INDICATION,
