@@ -183,7 +183,7 @@ int KnxTelegram::get_sequence_number() {
 }
 
 void KnxTelegram::set_sequence_number(int number) {
-  buffer[6] = 0buffer[6] & B11000011;
+  buffer[6] = 0buffer[6] & 0b11000011;
   buffer[6] = 0buffer[6] | (number << 2);
 }
 
@@ -393,13 +393,13 @@ void KnxTelegram::set_3byte_time(int weekday, int hour, int minute, int second) 
   weekday = weekday << 5;
 
   // Buffer [8] bit 5-7 for weekday, bit 0-4 for hour
-  buffer[8] = (weekday & B11100000) + (hour & B00011111);
+  buffer[8] = (weekday & 0b11100000) + (hour & 0b00011111);
 
   // Buffer [9] bit 6-7 empty, bit 0-5 for minutes
-  buffer[9] =  minute & B00111111;
+  buffer[9] =  minute & 0b00111111;
 
   // Buffer [10] bit 6-7 empty, bit 0-5 for seconds
-  buffer[10] = second & B00111111;
+  buffer[10] = second & 0b00111111;
 }
 
 int KnxTelegram::get_3byte_weekday_value() {
@@ -407,7 +407,7 @@ int KnxTelegram::get_3byte_weekday_value() {
     // Wrong payload length
     return 0;
   }
-  return (buffer[8] & B11100000) >> 5;
+  return (buffer[8] & 0b11100000) >> 5;
 }
 
 int KnxTelegram::get_3byte_hour_value() {
@@ -415,7 +415,7 @@ int KnxTelegram::get_3byte_hour_value() {
     // Wrong payload length
     return 0;
   }
-  return (buffer[8] & B00011111);
+  return (buffer[8] & 0b00011111);
 }
 
 int KnxTelegram::get_3byte_minute_value() {
@@ -423,7 +423,7 @@ int KnxTelegram::get_3byte_minute_value() {
     // Wrong payload length
     return 0;
   }
-  return (buffer[9] & B00111111);
+  return (buffer[9] & 0b00111111);
 }
 
 int KnxTelegram::get_3byte_second_value() {
@@ -431,17 +431,17 @@ int KnxTelegram::get_3byte_second_value() {
     // Wrong payload length
     return 0;
   }
-  return (buffer[10] & B00111111);
+  return (buffer[10] & 0b00111111);
 }
 
 void KnxTelegram::set_3byte_date(int day, int month, int year) {
   set_payload_length(5);
 
   // Buffer [8] bit 5-7 empty, bit 0-4 for month days
-  buffer[8] = day & B00011111;
+  buffer[8] = day & 0b00011111;
 
   // Buffer [9] bit 4-7 empty, bit 0-3 for months
-  buffer[9] =  month & B00001111;
+  buffer[9] =  month & 0b00001111;
 
   // Buffer [10] fill with year
   buffer[10] = year;
@@ -452,7 +452,7 @@ int KnxTelegram::get_3byte_day_value() {
     // Wrong payload length
     return 0;
   }
-  return (buffer[8] & B00011111);
+  return (buffer[8] & 0b00011111);
 }
 
 int KnxTelegram::get_3byte_month_value() {
@@ -460,7 +460,7 @@ int KnxTelegram::get_3byte_month_value() {
     // Wrong payload length
     return 0;
   }
-  return (buffer[9] & B00001111);
+  return (buffer[9] & 0b00001111);
 }
 
 int KnxTelegram::get_3byte_year_value() {
