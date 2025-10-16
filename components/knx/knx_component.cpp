@@ -182,7 +182,7 @@ namespace knx {
   bool KnxComponent::group_write_4bit_int(String address, int value) {
     int out_value = 0;
     if (value) {
-      out_value = value & B00001111;
+      out_value = value & 0b00001111;
     }
 
     this->create_knx_message_frame(2, KNX_COMMAND_WRITE, address, out_value);
