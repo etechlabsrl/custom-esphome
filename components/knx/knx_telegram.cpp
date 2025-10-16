@@ -157,7 +157,7 @@ void KnxTelegram::set_command(KnxCommandType command) {
 }
 
 KnxCommandType KnxTelegram::get_command() {
-  return (KnxCommandType) (((buffer[6] & B00000011) << 2) | ((buffer[7] & B11000000) >> 6));
+  return (KnxCommandType) (((buffer[6] & 0b00000011) << 2) | ((buffer[7] & 0b11000000) >> 6));
 }
 
 void KnxTelegram::set_control_data(KnxControlDataType cd) {
