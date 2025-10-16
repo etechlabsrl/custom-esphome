@@ -57,7 +57,7 @@ class KnxTelegram {
  public:
   KnxTelegram();
   void clear();
-  // ... (metodi esistenti)
+  int calculate_checksum();
   void set_buffer(uint8_t *new_buffer);
   uint8_t *get_buffer() { return buffer; }
   void set_priority(KnxPriorityType type);
@@ -97,8 +97,8 @@ class KnxTelegram {
   int get_4bit_int_value();
   void set_4bit_direction_value(bool direction);
   bool get_4bit_direction_value();
-  void set_4bit_steps_value(byte steps);
-  byte get_4bit_steps_value();
+  void set_4bit_steps_value(uint8_t steps);
+  uint8_t get_4bit_steps_value();
   void set_1byte_uchar_value(uint8_t value);
   uint8_t get_1byte_uchar_value();
   void set_2byte_uchar_value(uint16_t value);
@@ -116,6 +116,9 @@ class KnxTelegram {
   int get_3byte_date_year_value();
   int get_3byte_date_month_value();
   int get_3byte_date_day_value();
+  void set_4byte_float_value(float value);
+  float get_4byte_float_value();
+  String get_14byte_value();
 
  protected:
   uint8_t buffer[24];
