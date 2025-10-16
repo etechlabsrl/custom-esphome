@@ -1,4 +1,4 @@
-<// Author: Dulgheru Mihaita (Since 2022)
+// Author: Dulgheru Mihaita (Since 2022)
 // Last modified: 05.05.2022
 
 #pragma once
