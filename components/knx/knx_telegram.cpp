@@ -106,11 +106,11 @@ String KnxTelegram::get_target_group(){
 }
 
 int KnxTelegram::get_target_main_group() {
-  return ((buffer[3] & B01111000) >> 3);
+  return ((buffer[3] & 0b01111000) >> 3);
 }
 
 int KnxTelegram::get_target_middle_group() {
-  return (buffer[3] & B00000111);
+  return (buffer[3] & 0b00000111);
 }
 
 int KnxTelegram::get_target_sub_group() {
@@ -118,11 +118,11 @@ int KnxTelegram::get_target_sub_group() {
 }
 
 int KnxTelegram::get_target_area() {
-  return ((buffer[3] & B11110000) >> 4);
+  return ((buffer[3] & 0b11110000) >> 4);
 }
 
 int KnxTelegram::get_target_line() {
-  return (buffer[3] & B00001111);
+  return (buffer[3] & 0b00001111);
 }
 
 int KnxTelegram::get_target_member() {
